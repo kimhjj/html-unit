@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML Sum</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        html {
+            height: calc(100% - 60px);
+        }
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>Spread</div>
+    <div>Rest</div>
+	
+    <script>
+		const title = "background-color: red; color: white;";
+		const subtitle = "background-color: blue; color: white;";
+		
+		// spread (전개 구문)
+		console.log("%c%s", title, 'javascript spread')
+		console.log("%c%s", subtitle, 'spread 예제1 사용')
+		const arr1 = [1,2,3,4,5];
+		const arr2 = ['a','b','c','d'];
+		
+		console.log(arr1);
+		console.log(...arr1);
+		console.log([...arr1]);
+		console.log(arr2);
+		console.log(...arr2);
+		console.log([...arr2]);
+		console.log(arr1, arr2);
+		console.log(...arr1, ...arr2);
+		console.log([...arr1, ...arr2]);
+		
+		// spread 배열 복사 (1차원 깊은 복사, Object.assign()과 동일)
+		console.log("%c%s", subtitle, 'spread 예제2 배열 복사')
+		const copyarr = [...arr1];
+		copyarr.push(6);
+		console.log(arr1);
+		console.log(copyarr);
+		
+		// spread 배열 리터럴
+		console.log("%c%s", subtitle, 'spread 예제3 배열 리터럴')
+		const parts = ['shoulders', 'knees'];
+		const lyrics = ['head', ...parts, 'and', 'toes'];
+		console.log(lyrics);
+		
+		// spread는 여러번 사용 가능
+		console.log("%c%s", subtitle, 'spread 예제4 인수 재사용')
+		const myFunction = (v, w, x, y, z) => console.log(v, w, x, y, z);
+		const params = [0, 1];
+		myFunction(-1, ...params, 2, ...[3]);
+		
+		// rest (나머지 매개변수)
+		console.log("%c%s", title, 'javascript rest')
+		console.log("%c%s", subtitle, 'rest 예제1 사용')
+		const sum = (...args) => {
+			return args.reduce((arr, curr) => arr + curr, 0)
+		}
+		
+		// rest 매개변수는 실제 배열이다. Array 관련 함수 사용 가능
+		// 사용법
+		//	-> 가능 foo(arg1, arg2, ...correct)
+		// 	-> 안됨 foo(...one, ...wrong, ...wrong)	// 함수 정의에는 하나의 ...만 존재
+		// 	-> 안됨 foofoo(...wrong, arg2, arg3)		// 나머지(rest)는 마지막 매개변수여야 함
+		
+		console.log(sum(1,2,3,4,5));
+		console.log(sum(1,2,3,4,5,10));
+		console.log(sum(1,2,3,4,5,10,12));
+		
+    </script>
+</body>
+</html>
