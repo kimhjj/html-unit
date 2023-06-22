@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML Tab</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+    </style>
+</head>
+<body>
+    <div>
+		<input type="text" id="inputText" value="" />
+		<button onclick="addOne();">더하기</button>
+		<button onclick="clearInput();">입력초기화</button>
+	</div>
+	<div>
+		<table id="dataTable">
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	
+    <script>
+	
+		let serial = 1;
+		let itemList = [];
+		
+		const clearInput = () => {
+			document.getElementById("inputText").value = "";
+		}
+		
+		const addOne = () => {
+			const newItem = {
+				id: serial++,
+				name: document.getElementById("inputText").value,
+			}
+			itemList = [
+				...itemList,
+				newItem
+			]
+			
+			renderOrderList();
+		}
+		
+		const removeOne = (id) => {
+			itemList = itemList.filter(item => item.id !== id);
+			
+			renderOrderList();
+		}
+		
+		const renderOrderList = () => {
+			const html = itemList.reduce((acc, item) => {
+				return `
+					${acc}
+					<tr>
+						<td>${item.name}</td>
+						<td><div onclick="removeOne(${item.id })">[삭제]</div></td>
+					</tr>`;
+			}, "");
+			const table = document.getElementById("dataTable");
+			const tbody = table.querySelector("tbody");
+			tbody.innerHTML = html;
+		}
+		
+    </script>
+</body>
+</html>

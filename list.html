@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML Menulist</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu-all-list">
+		<div class="coffee1">
+			<img class="coffe2" src="https://cdn.pixabay.com/photo/2023/05/30/06/16/vegetable-pan-8027678_1280.jpg" onclick="func1()" width="320" height="320" />
+			<p>아메</p>
+			<p>2,500원</p>
+		</div>
+		<div class="coffee1">
+			<img class="coffe2" src="https://cdn.pixabay.com/photo/2023/05/11/04/54/squirrel-7985502_1280.jpg" onclick="func2()" width="320" height="320" />
+			<p>라떼</p>
+			<p>2,800원</p>
+		</div>
+		<div class="coffee1">
+			<img class="coffe2" src="https://cdn.pixabay.com/photo/2023/05/17/19/20/bird-8000880_1280.jpg" onclick="func3()" width="320" height="320" />
+			<p>바닐라라떼</p>
+			<p>3,300원</p>
+		</div>
+		<div class="coffee1">
+			<img class="coffe2" src="https://cdn.pixabay.com/photo/2023/05/30/08/06/planting-8027884_1280.jpg" onclick="func4()" width="320" height="320" />
+			<p>아인슈페너</p>
+			<p>3,800원</p>
+		</div>
+    </div>	
+	
+    <div id="menu-for-list"></div>
+	
+    <script>
+
+		const menuList = [
+			{id: 1, name: "아메", price: 2500, image: "https://cdn.pixabay.com/photo/2023/05/30/06/16/vegetable-pan-8027678_1280.jpg"},
+			{id: 2, name: "라떼", price: 2800, image: "https://cdn.pixabay.com/photo/2023/05/11/04/54/squirrel-7985502_1280.jpg"},
+			{id: 3, name: "바닐라라떼", price: 3300, image: "https://cdn.pixabay.com/photo/2023/05/17/19/20/bird-8000880_1280.jpg"},
+			{id: 4, name: "아인슈페너", price: 3800, image: "https://cdn.pixabay.com/photo/2023/05/30/08/06/planting-8027884_1280.jpg"},
+		]
+		
+		const menuHtml = menuList.reduce((acc, curr) => {
+			const {id, name, price, image} = curr;
+			return (
+				`${acc}
+				<div class="coffee1">
+					<img class="coffe2" src=${image} onclick="selectMenu(${id})" width="320" height="320" />
+					<p>${name}</p>
+					<p>${price}</p>
+				</div>`
+			);
+		}, "");
+		
+		const menuElement = document.getElementById("menu-for-list");
+		menuElement.innerHTML = menuHtml;
+		
+		const selectMenu = (id) => {
+			console.log(`for문으로 만든 list =>> ${id}`);
+			const menu = menuList.find((menu)=>{
+				return menu.id === id
+			})
+			
+			console.log(`for문으로 만든 list =>> ${menu.name}`);
+		}
+		
+		const func1 = () => {console.log('고정 list =>> 1');}
+		const func2 = () => {console.log('고정 list =>> 2');}
+		const func3 = () => {console.log('고정 list =>> 3');}
+		const func4 = () => {console.log('고정 list =>> 4');}
+		
+    </script>
+</body>
+</html>

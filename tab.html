@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML Tab</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        html {
+            height: calc(100% - 60px);
+        }
+        body {
+            height: 100%;
+        }
+		.active {
+			background-color: tomato;
+		}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="menuTab">
+			<ul class="menuList">
+				<li>
+					<a href="#coffee" data-name="coffee" class="tab active" onclick="selectTab('coffee')"> 커피 </a>
+				</li>
+				<li>
+					<a href="#juice" data-name="juice" class="tab" onclick="selectTab('juice')"> 주스 </a>
+				</li>
+				<li>
+					<a href="#etc" data-name="etc" class="tab" onclick="selectTab('etc')"> 브레드 </a>
+				</li>
+			</ul>
+        </div>
+	</nav>
+
+	<section>
+		<article id="coffee" class="content" data-name="coffee">커피</article>
+		<article id="juice" class="content" data-name="juice">주스</article>
+		<article id="etc" class="content" data-name="etc">브레드</article>
+	</section>
+	
+    <script>
+
+		const selectTab = (tabname) => {
+			changeTab(tabname);
+			changeContent(tabname);
+		}
+		
+		const changeTab = (activeTab) => {
+			const tabList = document.querySelectorAll(".tab");
+			tabList.forEach((tab, index) => {
+				tab.classList.remove('active');
+				
+				if(tab.dataset.name === activeTab) {
+					tab.classList.add('active');
+				}
+			});
+		}
+		
+		const changeContent = (activeTab) => {
+			const contentList = document.querySelectorAll(".content");
+			contentList.forEach((content, index) => {
+				const active = (content.dataset.name === activeTab);
+				content.style.display = active ? 'flex' : 'none';
+			});
+		}
+		
+		const defaultHash = "coffee";
+		const hash = window.location.hash.substring(1) || defaultHash;
+		changeTab(hash);
+		changeContent(hash);
+		
+    </script>
+</body>
+</html>
